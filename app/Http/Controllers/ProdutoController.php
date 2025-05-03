@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
+    public function __construct(){    
+    	$this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        // $user_id = auth()->user()->id;
+
+        $produtos = Produto::paginate(8);
+        // $produtos = Produto::selectRaw('* from produtos')->get();
+        return view('produto.index', ['produtos' => $produtos]);
     }
 
     /**
@@ -20,7 +27,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produto.create');
     }
 
     /**
@@ -28,7 +35,9 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all(['name','stock','price',  'description']);
+        $produto = Produto::create($dados);
+        return redirect()->route('produto.show', ['produto' => $produto->id]);
     }
 
     /**
@@ -36,7 +45,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        return view('produto.show', ['produto' => $produto]);
     }
 
     /**
@@ -44,7 +53,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        return view('produto.edit', ['produto'=>$produto]);
     }
 
     /**
@@ -52,7 +61,8 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $produto->update($request->all());
+        return redirect()->route('produto.show', ['produto' => $produto->id]);
     }
 
     /**
@@ -60,6 +70,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        return redirect()->route('produto.index');
     }
 }
