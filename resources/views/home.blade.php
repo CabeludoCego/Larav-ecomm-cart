@@ -26,13 +26,29 @@
                 </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    {{ __('You are logged in!') }}
+                    @session('success')
+                        <div class="alert alert-success">{{ $value }}</div>
+                    @endsession
+
+                    <div class="row">
+                        
+                    @foreach ($products as $key => $product)
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="/storage/usbmouse1.jpeg" alt="mousse.jpg" class="card-img-top p-2">
+                                <div class="card-body">
+                                    <h4>{{ $product->name }}</h4>
+                                    <p>Sobre: {{ $product->description }}</p>
+                                    <p>Qtd.: {{ $product->stock }}</p>
+                                    <p>R$ {{ $product->price }}</p>
+                                    <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-warning">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    </div>
                 </div>
             </div>
         </div>
