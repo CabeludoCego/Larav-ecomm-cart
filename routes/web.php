@@ -22,5 +22,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 
 Route::resource('/produto', ProdutoController::class);
