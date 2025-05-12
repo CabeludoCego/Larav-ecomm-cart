@@ -25,4 +25,7 @@ Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 
+Route::post('/order', [CartController::class, 'order'])->name('order.post');
+Route::get('/order-success', [CartController::class, 'orderSuccess'])->name('order.success');
+
 Route::resource('/produto', ProdutoController::class);

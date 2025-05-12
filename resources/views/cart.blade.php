@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
 
-	<form action="{{ route('order.post') }}" method="POST">
-		@csrf
-
 		<div class="row" id="cart-products">
 			@include('cartProducts')
 		</div>
+
+	<form action="{{ route('order.post') }}" method="POST">
+		@csrf
 
 		<div class="text-end">
 			<a href="{{ url('/home') }}" class="btn btn-warning">Continue Shopping</a>
