@@ -4,7 +4,7 @@
 <div class="container">
 
 	<form action="{{ route('order.post') }}" method="POST">
-		@csrf_token
+		@csrf
 
 		<div class="row" id="cart-products">
 			@include('cartProducts')
